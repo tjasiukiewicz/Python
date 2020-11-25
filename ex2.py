@@ -8,14 +8,14 @@ fvat = {
     'sprzedawca': {
         'nazwa': "Kant & Oszust Sp. z o.o",
         'adres': "01-001 Kraków ul. Błotna 12",
-        'NIP'  : "123123123123"
+        'NIP':   "123123123123"
     },
-    'kupujący'  : {
+    'kupujący': {
         'nazwa': "Wziąć i Uciekać S.A.",
         'adres': "03-003 Koluszki ul. Zachlapana 1",
-        'NIP'  : "323323323323"
+        'NIP': "323323323323"
     },
-    'pozycje'  : (
+    'pozycje': (
         {
           'nazwa': "Miś pluszowy",
           'netto': 50.5,

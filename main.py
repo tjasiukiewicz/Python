@@ -41,7 +41,7 @@ print(2**178)
 
 
 napis = "abrakadabra"
-print(napis[::-1]) # [początek:koniec:krok]
+print(napis[::-1])  # [początek:koniec:krok]
 # [:] wszystkie
 # [:4] do 3 włącznie (licząc od 0)
 # [-4] od końca 4
@@ -60,7 +60,7 @@ print(slownik.items())
 
 # Tuple
 tpl = (12, "Jola", 123.4, [1, 2, 3], 34)
-#tpl[0] = 42  # To jest błąd!
+# tpl[0] = 42  # To jest błąd!
 tpl[3][0] = 100
 print(tpl)
 
@@ -100,7 +100,7 @@ for line in file:
     print(line, end="")
 file.close()
 
-lineInMyFile = open("/etc/passwd", "r").readlines() # Dyskusyjna praktyka
+lineInMyFile = open("/etc/passwd", "r").readlines()  # Dyskusyjna praktyka
 print(lineInMyFile[::-1])
 
 data = {(0, 1): "tv", (10, 11): ["radio", "pen"], (22, 22): "desk"}
