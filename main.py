@@ -301,3 +301,67 @@ print(grow())
 print(grow())
 print(grow(["ala", "tola"]))
 print(grow())
+
+# Krotka wywołań...
+
+a, b, c = 1, 2, 3  # To są krotki. Mogę zapisać jawnie także tak....
+(a, b, c) = (1, 2, 3)
+
+k = (0)  # Python to "spłaszczy" do: k = 0
+print(k)
+
+k = (0,)  # O to jest krotka z 1 elementem
+print(k)
+
+#
+#    X
+#   /\
+#   |
+#   Y
+
+class X:
+    def show(self):
+        print("In parent")
+
+class Y(X):
+    def show(self):
+        X.show(self)
+        print("In child")
+
+y = Y()
+y.show()
+
+#    A
+#  /\ /\
+# B    C
+# /\  /\
+#   D
+
+class A:
+    def show(self):
+        print("In A")
+
+class B(A):
+    def show(self):
+        super(B, self).show()
+        #A.show(self)
+        print("In B")
+
+class C(A):
+    def show(self):
+        super(C, self).show()
+        #A.show(self)
+        print("In C")
+
+class D(B, C):
+    def show(self):
+        super(D, self).show()
+        #B.show(self)
+        #C.show(self)
+        print("In D")
+
+d = D()
+d.show()
+print(d.__class__.__mro__)
+
+

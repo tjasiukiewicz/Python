@@ -52,11 +52,15 @@ def perfect_number_in_range(min_value, max_value):
     """Zwraca z zakresu [min, max], liczby doskonałe"""
     return [val for val in range(min_value, max_value + 1) if is_perfect_number(val)]
 
+
 print(perfect_number_in_range(1, 10000))
+
 
 def perfect_number_in_range_gen(min_value, max_value):
     """Generator zwracający z zakresu [min, max], liczby doskonałe"""
     return (val for val in range(min_value, max_value + 1) if is_perfect_number(val))
 
+
 for val in perfect_number_in_range_gen(1, 11000):
     print(val, flush=True)
+
