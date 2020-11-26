@@ -137,3 +137,167 @@ print(lst)
 
 dct = {k: ord(k) for k in "abcdefgh"}
 print(dct)
+
+# Funkcje
+def foo(a, b, c):
+    print(a, b, c)
+
+foo(1, "Honorata", 3)
+
+def bar(a, b, c=10):
+    print(a, b, c)
+
+bar(1, 3)
+
+def bar(a=1, b=12):
+    print(a, b)
+
+bar()
+
+def foo(*args):
+    print(type(args))
+    for a in args:
+        print(a)
+
+foo(1, 2, 3)
+foo()
+foo("Ala", 12, 333, 23)
+
+def foo(a, b, c=10, *args):
+    pass
+
+def foo(**kwargs):
+    print(kwargs)
+
+foo(host="127.0.0.1", login="hacker", passw="letmein")
+
+print("a", "b", "b", sep="+")
+
+def foo(a, b, c, d=12, e=45, *args, **kwargs):
+    pass
+
+def foo(myDict):
+    print(myDict)
+
+foo({"a": 123, "ala": 7877})
+
+# map
+prices = [100.0, 200.0, 500.0]
+
+result = []
+for price in prices:
+    result.append(price * 1.23)
+
+print(result)
+
+result = [price * 1.23 for price in prices]
+
+print(result)
+
+def complex_tax(price):
+    if 150.0 < price < 300.0:
+        return price * 1.23
+    return price * 1.07
+
+result = []
+for price in prices:
+    result.append(complex_tax(price))
+
+print(result)
+
+result = map(complex_tax, prices)
+
+print(list(result))
+
+result = map(lambda p: 1.23 * p, prices)
+
+print(list(result))
+
+points = [(1, 2), (45, 2), (7, 8)]
+
+print(list(map(lambda p: p[0] * p[1], points)))
+
+dct = { "a": 1, "b": 2, "c": 12}
+print(list(map(lambda k: str(k[0]) + str(k[1]), dct.items())))
+
+#  Filter
+data = [1, 2, 3, 4, 5]
+print(list(filter(lambda x: x % 2, data)))
+
+# Złożenie...
+data = [1, 2, 3, 4, 5]
+result = list(
+    map(lambda x: x * 2,
+        filter(lambda x: not (x % 2),
+            data)
+    )
+)
+print(result)
+
+# reduce
+from functools import reduce
+
+# data = [ a, b, c ]
+# X <- arg początkowy
+# X a
+#  +
+#   X + a
+#     X + a + b
+#       X + a + c
+data = [1, 2, 3]
+result = reduce(lambda x, y: x + y, data, 10)
+print(result)
+
+# reduce nieco nietypowy
+data = [1, 2, 3, 4, 5]
+
+def count(counter, val):
+    if val % 2:
+        return counter + 1
+    return counter
+
+count_values = reduce(count, data, 0)
+print(count_values)
+
+# Oczywiście ten sam efekt
+print(len(list(filter(lambda x: x % 2, data))))
+
+print("-" * 30)
+
+# Generator
+
+def fibonacci():
+    x0, x1 = 1, 1
+    while True:
+        yield x0
+        x0, x1 = x1, x0 + x1
+
+f = fibonacci()
+for i in range(5):
+    print(f.__next__())
+
+def fibonacci(n):
+    x0, x1 = 1, 1
+    for _ in range(n):
+        yield x0
+        x0, x1 = x1, x0 + x1
+
+for val in fibonacci(5):
+    print(val)
+
+# Argument domyślny jest instancjonowany w trakcie definiowania funkcji
+class X:
+    def __init__(self):
+        print("Konstrukcja!")
+
+def foo(x = X()):
+    pass
+
+def grow(x = []):  # Licznik dowiązań do x ma wartość 2. 1 to powiązanie ze zmienną, 2 zmienna jest używana w funckji.
+    x.append(1)
+    return x
+
+print(grow())
+print(grow())
+print(grow(["ala", "tola"]))
+print(grow())
