@@ -364,4 +364,22 @@ d = D()
 d.show()
 print(d.__class__.__mro__)
 
+# Przykład przeciążenia
+class X:
+    def __getitem__(self, idx):
+        return idx * 100
+
+    def __str__(self):
+        return "Klasa X, z jakąś zawartością :)"
+
+    def __getattr__(self, item):
+        if item == "czesc":
+            return "no witam"
+        return "nie ma atrybutu"
+
+x = X()
+print(x[13])
+print(x)
+print(x.czesc)
+
 
