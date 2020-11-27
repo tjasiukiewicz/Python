@@ -506,10 +506,12 @@ def calculate(a, b):
 print(calculate.__doc__)
 print(calculate.__name__)
 
-# Decorator cache
+# Przykład kodu do ćwiczenia: Decorator cache
 import time
+import functools
 
 def cache_decorator(func):
+    cache = {}
     pass
 
 @cache_decorator
