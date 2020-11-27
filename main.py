@@ -528,3 +528,75 @@ print(big_fat_function(2, 1))
 # hit cache
 print(big_fat_function(2, 1))
 print(big_fat_function(2, 2))
+
+# (7)
+def args_deco(a):
+    def decor(func):
+        def internal(*args, **kwargs):
+            return func(*args, **kwargs)
+        return internal
+    return decor
+
+@args_deco(12)
+def foo():
+    pass
+
+# clip with arguments
+def clip(min_value, max_value):
+    def clip_deco(func):
+        def internal(*args, **kwargs):
+            result = func(*args, **kwargs)
+            if result < min_value:
+                result = min_value
+            elif result > max_value:
+                result = max_value
+            return result
+        return internal
+    return clip_deco
+
+@clip(0, 10)
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+print(calculate(10, 10))
+
+# Dekorowane elementy klasy
+class X:
+    staticAttrib = 42
+
+    def __init__(self, val = 12):
+        self.__val = val
+
+    @staticmethod
+    def staticInfo():
+        return X.staticAttrib
+
+    @classmethod
+    def clsMethod(cls):
+        print(cls.__name__)
+        print(type(cls))
+
+    @property
+    def x(self):
+        print("Pobranie wartości")
+        return self.__val
+
+    @x.setter
+    def x(self, val):
+        print("Ustawienie wartości")
+        self.__val = val
+
+    @x.deleter
+    def x(self):
+        print("Usunięcie wartości")
+        del(self.__val)
+
+x = X()
+X.clsMethod()
+x.x = 13
+print(x.x)
+del x.x
+print(X.staticAttrib)
+print(x.staticInfo())
+print(x.staticAttrib)
