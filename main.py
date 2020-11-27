@@ -567,6 +567,7 @@ class X:
 
     def __init__(self, val = 12):
         self.__val = val
+        # self.staticAttrib = 123  # Uwaga: To "przykryje attr statyczny"!
 
     @staticmethod
     def staticInfo():
