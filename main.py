@@ -512,7 +512,9 @@ import functools
 
 def cache_decorator(func):
     cache = {}
-    pass
+    # dumb lambda :)
+    # To tylko po to by "kadłubek" nie zwracał błędów w kodzie :)
+    return lambda a, b: 42
 
 @cache_decorator
 def big_fat_function(a, b):
