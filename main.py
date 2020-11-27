@@ -382,4 +382,145 @@ print(x[13])
 print(x)
 print(x.czesc)
 
+# Dekoratory
+# Wzorce www.sourcemaking.com  <- Wzorce
+#
+# (1)
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
 
+def wrapper(func):
+    print("In wrapper(...)")
+    def internal(*args, **kwargs):
+        print("Exec internal(...)")
+        result = func(*args, **kwargs)
+        return result
+    print("End wrapper(...)")
+    return internal
+
+decorated_calculate = wrapper(calculate)
+print(decorated_calculate(2, 2))
+
+old_calculate = calculate
+calculate = wrapper(old_calculate)
+
+print(calculate(2, 2))
+
+# (2)
+print("-" * 30)
+def wrapper(func):
+    print("In wrapper(...)")
+    def internal(*args, **kwargs):
+        print("Exec internal(...)")
+        result = func(*args, **kwargs)
+        return result
+    print("End wrapper(...)")
+    return internal
+
+
+@wrapper
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+# (3)
+def clip_0_10(func):
+    def internal(*args, **kwargs):
+        result = func(*args, **kwargs)
+        if result < 0:
+            result = 0
+        elif result > 10:
+            result = 10
+        return result
+    return internal
+
+@clip_0_10
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+print(calculate(-10, 5))
+print(calculate(5, 6))
+
+# (4)
+def wrapper(func):
+    """Wrapper"""
+    def internal(*args, **kwargs):
+        """Internal"""
+        print("Exec internal(...)")
+        result = func(*args, **kwargs)
+        return result
+    return internal
+
+@wrapper
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+print(calculate.__doc__)
+print(calculate.__name__)
+
+# (5)
+def wrapper(func):
+    """Wrapper"""
+    def internal(*args, **kwargs):
+        """Internal"""
+        print("Exec internal(...)")
+        result = func(*args, **kwargs)
+        return result
+    internal.__doc__ = func.__doc__
+    internal.__name__ = func.__name__
+    internal.__old_func = func
+    return internal
+
+@wrapper
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+print(calculate.__doc__)
+print(calculate.__name__)
+
+# (6)
+import functools
+
+def wrapper(func):
+    """Wrapper"""
+    @functools.wraps(func)
+    def internal(*args, **kwargs):
+        """Internal"""
+        print("Exec internal(...)")
+        result = func(*args, **kwargs)
+        return result
+    # internal.__doc__ = func.__doc__
+    # internal.__name__ = func.__name__
+    # internal.__old_func = func
+    return internal
+
+@wrapper
+def calculate(a, b):
+    """Zwraca sumę 2 argumentów"""
+    return a + b
+
+print(calculate.__doc__)
+print(calculate.__name__)
+
+# Decorator cache
+import time
+
+def cache_decorator(func):
+    pass
+
+@cache_decorator
+def big_fat_function(a, b):
+    time.sleep(2)
+    return a + b
+
+# miss cache
+print(big_fat_function(2, 3))
+print(big_fat_function(2, 2))
+print(big_fat_function(2, 1))
+# hit cache
+print(big_fat_function(2, 1))
+print(big_fat_function(2, 2))
