@@ -70,3 +70,5 @@ if __name__ == '__main__':
     sprzedawca.dodajKsiazke(ksiazka2, paczka)
 
     sprzedawca.finalizuj(paczka)
+
+
