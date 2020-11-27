@@ -578,25 +578,25 @@ class X:
         print(type(cls))
 
     @property
-    def x(self):
+    def abc(self):
         print("Pobranie wartości")
         return self.__val
 
-    @x.setter
-    def x(self, val):
+    @abc.setter
+    def abc(self, val):
         print("Ustawienie wartości")
         self.__val = val
 
-    @x.deleter
-    def x(self):
+    @abc.deleter
+    def abc(self):
         print("Usunięcie wartości")
         del(self.__val)
 
 x = X()
 X.clsMethod()
-x.x = 13
-print(x.x)
-del x.x
+x.abc = 13
+print(x.abc)
+del x.abc
 print(X.staticAttrib)
 print(x.staticInfo())
 print(x.staticAttrib)
