@@ -27,6 +27,18 @@ def most_common_words2(file_name, count):
     return counter.most_common(count)
 
 
+# .. i zapis z wyrażeniem generatorowym
+def most_common_words3(file_name, count):
+    counter = Counter()
+    try:
+        with open(file_name, 'r', encoding="UTF-8") as file:
+            [counter.update(line.split()) for line in file]
+    except FileNotFoundError as e:
+        print(e)
+        raise RuntimeError("Missing file!!!")
+    return counter.most_common(count)
+
+
 if __name__ == '__main__':
-    for c, count in most_common_words2("tadeusz.txt", 10):
+    for c, count in most_common_words3("tadeusz.txt", 10):
         print(c, count)

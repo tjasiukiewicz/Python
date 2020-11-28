@@ -28,13 +28,16 @@
 # str(1410)
 # int(str(1410)[::-1])
 
+
 def is_palindrome_number(num):
     """Sprawdza czy liczba jest palindromiczna"""
     return int(str(num)[::-1]) == num
 
+
 def funny_add(num):
     """Dodaje do liczby jej odwróconą pozycyjnie wartość"""
     return int(str(num)[::-1]) + num
+
 
 def make_funny_adds(num):
     """Zwraca krotkę z (liczba, ilość dodawań, wartość końcowa)"""
@@ -45,10 +48,23 @@ def make_funny_adds(num):
         result = funny_add(result)
     return num, add_counter, result
 
+
 def show_palindromic_numbers(min_val, max_val):
     """Prezentuje ilość dodawań palidromów w postaci -> Liczba: ilość_dodawań wynik_palindr"""
     for val in range(min_val, max_val + 1):
         print("%d: %d %d" % make_funny_adds(val))
 
+
+# Oczywiście można zadanie wykonać także i bez podziału na funkcje
+def show_palindromic_numbers2(min_val, max_val):
+    for val in range(min_val, max_val + 1):
+        add_counter = 0
+        result = val
+        while not (int(str(result)[::-1]) == result):
+            add_counter += 1
+            result += int(str(result)[::-1])
+        print(f"{val}: {add_counter} {result}")
+
+
 if __name__ == '__main__':
-    show_palindromic_numbers(1, 195)
+    show_palindromic_numbers2(1, 195)
